@@ -2,6 +2,8 @@
   "name": "next-app",
   "version": "0.1.0",
   "private": true,
+  "author": "Jacopo Marrone",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
