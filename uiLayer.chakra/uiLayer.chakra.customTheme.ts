@@ -72,4 +72,13 @@ const themeOverrides = {
   },
   config,
 } as ThemeOverride;
-export const chakraCustomTheme = extendTheme(themeOverrides);
+
+// Export theme both as "named export" and "default export"
+// This double export ensure that "@chakra-ui/cli" can import the theme
+//
+// "The theme entrypoint file should export the theme object either
+// as default export or as named theme export.""
+// Read more on How to generate TS typings for autocomplete:
+// https://chakra-ui.com/docs/styled-system/advanced-theming#theme-typings
+export const theme = extendTheme(themeOverrides);
+export default theme;
