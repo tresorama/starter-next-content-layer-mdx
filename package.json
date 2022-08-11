@@ -5,11 +5,13 @@
   "author": "Jacopo Marrone",
   "license": "MIT",
   "scripts": {
+    "dev:openbrowser": "npm run open-browser && npm run dev",
     "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
-    "build": "next build",
+    "build": "rm -rf .next && next build",
     "start": "next start",
     "lint": "next lint",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "open-browser": "open http://localhost:3000 && exit 0"
   },
   "dependencies": {
     "next": "12.2.3",
