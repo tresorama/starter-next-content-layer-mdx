@@ -1,8 +1,13 @@
 import type { ThemeOverride, ThemeConfig } from "@chakra-ui/react";
 import { theme as baseTheme, extendTheme } from "@chakra-ui/react";
 
-// 2. Extend the theme to include custom colors, fonts, etc
+// TIP:
+// When theme grows is size, a single theme.ts file is hard to manage.
+// See here a battle tested structure to manage a big theme:
+// https://chakra-ui.com/docs/styled-system/customize-theme#scaling-out-your-project
+
 //
+// 1. Declare "parts" of the custom theme to include custom colors, fonts, etc
 //
 
 const semanticTokens = {
@@ -63,7 +68,9 @@ const config: ThemeConfig = {
   useSystemColorMode: false,
 };
 
-// Build the theme
+//
+// 2. Compose the "parts" of the custom theme
+//
 const themeOverrides = {
   semanticTokens,
   textStyles,
@@ -73,6 +80,8 @@ const themeOverrides = {
   config,
 } as ThemeOverride;
 
+// 3. Extend "baseTheme" with "customTheme" overrides and export it.
+//
 // Export theme both as "named export" and "default export"
 // This double export ensure that "@chakra-ui/cli" can import the theme
 //
