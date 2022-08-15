@@ -16,8 +16,8 @@
     "open-browser": "open http://localhost:3000 && exit 0"
   },
   "dependencies": {
-    "@chakra-ui/icons": "^2.0.6",
-    "@chakra-ui/react": "^2.2.6",
+    "@chakra-ui/icons": "^2.0.8",
+    "@chakra-ui/react": "^2.2.8",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "framer-motion": "^7.0.1",
@@ -26,7 +26,7 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@chakra-ui/cli": "^2.1.4",
+    "@chakra-ui/cli": "^2.1.6",
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
     "@types/node": "18.6.3",
