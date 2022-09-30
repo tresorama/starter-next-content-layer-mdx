@@ -11,6 +11,7 @@
     "start": "next start",
     "lint": "next lint",
     "prettier": "prettier --write .",
+    "prepare": "husky install",
     "gen:theme-typings": "chakra-cli tokens ./uiLayer.chakra/uiLayer.chakra.customTheme.ts",
     "postinstall": "npm run gen:theme-typings",
     "open-browser": "open http://localhost:3000 && exit 0"
