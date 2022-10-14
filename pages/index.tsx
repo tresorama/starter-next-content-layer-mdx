@@ -1,19 +1,108 @@
-import type { NextPage } from 'next';
+import type { NextPage, GetStaticProps } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import styles from '../styles/Home.module.css';
-
+import Link from 'next/link';
+import { allDocMds, DocMd, allDocMdxes, DocMdx } from 'contentlayer/generated';
 import ChakraUIProvider from '@/uiLayer.chakra/uiLayer.chakra.provider';
 import { Box, Code, Heading, Stack, Text } from '@chakra-ui/react';
+import styles from '../styles/Home.module.css';
 
-const Home: NextPage = () => {
+
+type HomePageProps = {
+  data: {
+    docsMd: DocMd[];
+    docsMdx: DocMdx[];
+  }
+}
+
+export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
+  return { props: { data: { docsMd: allDocMds, docsMdx: allDocMdxes } } }
+}
+
+const Home: NextPage<HomePageProps> = ({ data }) => {
   return (
     <>
+      <ContentLayerSection data={data} />
       <ChakraSection />
       <DefaultNextSection />
     </>
   );
 };
+
+export default Home;
+
+const ContentLayerSection = ({ data }: { data: HomePageProps['data'] }) => {
+  const { docsMd, docsMdx } = data;
+  return (
+    <>
+      <div className="max-w-4xl mx-auto">
+
+        <div className="bg-gray-100">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32">
+              <h2 className="text-2xl font-bold text-gray-900">Doc Md</h2>
+
+              <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
+                {docsMd.map((doc) => (
+                  <div key={doc._id} className="group relative">
+                    <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
+                      {/* <img
+                        src={callout.imageSrc}
+                        alt={callout.imageAlt}
+                        className="h-full w-full object-cover object-center"
+                      /> */}
+                    </div>
+                    <h3 className="mt-6 text-sm text-gray-500">
+                      <Link href={doc.url}>
+                        <a>
+                          <span className="absolute inset-0" />
+                          {doc.title}
+                        </a>
+                      </Link>
+                    </h3>
+                    <p className="text-base font-semibold text-gray-900">{doc.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-gray-100">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32">
+              <h2 className="text-2xl font-bold text-gray-900">Doc Mdx</h2>
+
+              <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
+                {docsMdx.map((doc) => (
+                  <div key={doc._id} className="group relative">
+                    <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
+                      {/* <img
+                        src={callout.imageSrc}
+                        alt={callout.imageAlt}
+                        className="h-full w-full object-cover object-center"
+                      /> */}
+                    </div>
+                    <h3 className="mt-6 text-sm text-gray-500">
+                      <Link href={doc.url}>
+                        <a>
+                          <span className="absolute inset-0" />
+                          {doc.title}
+                        </a>
+                      </Link>
+                    </h3>
+                    <p className="text-base font-semibold text-gray-900">{doc.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </>
+  )
+}
 
 const ChakraSection = () => (
   <ChakraUIProvider>
@@ -30,6 +119,7 @@ const ChakraSection = () => (
     </Box>
   </ChakraUIProvider>
 )
+
 const DefaultNextSection = () => (
   <div className={styles.container}>
     <Head>
@@ -99,5 +189,3 @@ const DefaultNextSection = () => (
   </div>
 
 )
-
-export default Home;
